@@ -1,4 +1,7 @@
 streamlit
-requests
+fastapi
+uvicorn
 pandas
+requests
 matplotlib
+python-multipart
