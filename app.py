@@ -5,7 +5,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 # ---------- CONFIG ----------
-API_URL = "http://localhost:11434/api/generate"
+API_URL = "http://127.0.0.1:8080"
 MODEL_NAME = "llama3"
 
 st.set_page_config(page_title="SerenityGPT", page_icon="🧘‍♂️", layout="centered")
