@@ -1,32 +1,33 @@
-# app.py
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import requests
 
 app = FastAPI()
 
-# Enable CORS for Streamlit to communicate with FastAPI
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+MODEL_API_URL = "http://127.0.0.1:8080/completion"
+API_KEY = "llamakey"  # <-- Your API key from Anaconda Navigator
 
-LLAMA_API_URL = "http://127.0.0.1:8080/completion"  # llamafile server
+class PromptRequest(BaseModel):
+    model: str
+    prompt: str
 
 @app.post("/")
-async def root(request: Request):
-    data = await request.json()
-    prompt = data.get("prompt", "")
+def get_ai_response(data: PromptRequest):
+    payload = {
+        "prompt": data.prompt,
+        "temperature": 0.7,
+        "max_tokens": 256
+    }
+
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",  # Include the API key
+        "Content-Type": "application/json"
+    }
+
     try:
-        llama_response = requests.post(
-            LLAMA_API_URL,
-            json={"prompt": prompt, "temperature": 0.7, "n_predict": 300},
-            timeout=60
-        )
-        result = llama_response.json()
-        return {"response": result.get("content", "No response from LLaMA.")}
+        response = requests.post(MODEL_API_URL, headers=headers, json=payload)
+        response.raise_for_status()
+        completion = response.json().get("content", "") or response.json().get("response", "")
+        return {"response": completion}
     except Exception as e:
-        return {"response": f"❌ Failed to connect to LLaMA: {str(e)}"}
+        return {"response": f"Error: {e}"}
