@@ -1,0 +1,99 @@
+✅ Step-by-Step Commands to Run SerenityGPT
+🧠 Assumptions:
+Project folder: F:\DATA-SCIENCE_PROJECT_ALL\SerenityGPT
+
+Virtual environment name: serenity_env
+
+llamafile model is already running at http://127.0.0.1:8080/completion
+
+Using FastAPI backend + Streamlit frontend
+
+🧩 STEP 1: Open PowerShell and Navigate to Project Directory
+powershell
+Copy
+Edit
+cd F:\DATA-SCIENCE_PROJECT_ALL\SerenityGPT
+🧱 STEP 2: Activate the Virtual Environment
+If you’ve already created the environment:
+
+powershell
+Copy
+Edit
+.\serenity_env\Scripts\Activate.ps1
+If you see a permission error, first run this (one-time):
+
+powershell
+Copy
+Edit
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Then try again:
+
+powershell
+Copy
+Edit
+.\serenity_env\Scripts\Activate.ps1
+📦 STEP 3: Install Dependencies (only once or after requirements.txt changes)
+powershell
+Copy
+Edit
+pip install -r requirements.txt
+🧠 STEP 4: Ensure the LLaMA Model Server is Running
+If you're using Anaconda AI's llamafile:
+
+Go to Anaconda Navigator > AI Tab
+
+Make sure the model Meta-Llama-3-8B-Instruct_Q4_K_M.gguf is running
+
+It should say:
+http://127.0.0.1:8080 (with API Key: llamakey)
+
+✅ Leave this running in the background.
+
+🖥️ STEP 5: Start FastAPI Backend
+In the activated terminal:
+
+powershell
+Copy
+Edit
+uvicorn app:app --reload
+Expected output:
+
+nginx
+Copy
+Edit
+Uvicorn running on http://127.0.0.1:8000
+🎨 STEP 6: Run Streamlit Frontend
+Open a new PowerShell terminal, activate env again:
+
+powershell
+Copy
+Edit
+cd F:\DATA-SCIENCE_PROJECT_ALL\SerenityGPT
+.\serenity_env\Scripts\Activate.ps1
+Then run:
+
+powershell
+Copy
+Edit
+streamlit run streamlit_app.py
+✅ This will open your SerenityGPT UI in your browser at:
+
+arduino
+Copy
+Edit
+http://localhost:8501
+🛑 TO CLOSE THE APP:
+In each PowerShell terminal, press:
+
+mathematica
+Copy
+Edit
+Ctrl + C
+Then type y to confirm shutdown.
+
+Optionally deactivate the environment:
+
+powershell
+Copy
+Edit
+deactivate
