@@ -123,6 +123,93 @@ deactivate
 
 ---
 
+## 📚 Detailed Description of the Model Used
+
+### 🧠 Meta-LLaMA-3-8B-Instruct_Q4_K_M
+
+The `Meta-LLaMA-3-8B-Instruct_Q4_K_M` is a locally deployable, instruction-tuned large language model (LLM) developed by **Meta AI**. It is optimized for efficient resource use and conversational AI tasks, making it ideal for local chatbot applications like **SerenityGPT**.
+
+---
+
+### 🔍 General Overview
+
+| Property              | Value                                              |
+|-----------------------|----------------------------------------------------|
+| **Model Family**       | LLaMA (Large Language Model Meta AI)               |
+| **Model Name**         | Meta-LLaMA-3-8B-Instruct                           |
+| **Quantization**       | Q4_K_M (4-bit quantization for efficiency)         |
+| **Parameters**         | 8 Billion                                          |
+| **Architecture**       | Decoder-only Transformer                           |
+| **Context Length**     | 8,192 tokens                                       |
+| **Training Data**      | 15 Trillion tokens (public sources)                |
+| **Release Date**       | April 18, 2024                                    |
+| **API Endpoint Used**  | `http://127.0.0.1:8080/completion`                 |
+
+---
+
+### 📦 Quantization Details: Q4_K_M
+
+Quantization reduces the model’s size and computational needs by converting weights to a lower-bit format. The `Q4_K_M` quantization provides:
+
+- ✅ Significant memory footprint reduction  
+- 🚀 Faster inference speeds  
+- 🎯 Minimal quality loss in model output  
+- 🧠 Perplexity score around 8.52 (close to full precision)
+
+---
+
+### ⚡ Capabilities of the Model
+
+- 💬 Natural language conversations  
+- 📄 Text summarization and rewriting  
+- 📊 Basic reasoning and problem solving  
+- 🧑‍💻 Code generation and explanation  
+- 🌐 Multilingual text understanding  
+- 🧾 Instruction following and tool use
+
+---
+
+### 📈 Performance Benchmarks
+
+| Task / Benchmark    | Score / Accuracy       |
+|---------------------|------------------------|
+| **MMLU (5-shot)**   | 69.4%                  |
+| **GSM8K (Math)**    | 84.5% (with chain-of-thought prompting) |
+| **HumanEval**       | 72.6% pass@1           |
+
+These benchmarks position the model competitively among open-source LLMs in the 7B–13B parameter range.
+
+---
+
+### 🧩 Role in SerenityGPT
+
+This model acts as the **core AI engine** behind SerenityGPT, integrated as follows:
+
+| Component           | Description                                              |
+|---------------------|----------------------------------------------------------|
+| `llama_client.py`   | Connects to Anaconda AI’s local LLaMA API for inference  |
+| `app.py`            | FastAPI backend handling client requests and responses   |
+| `streamlit_app.py`  | Streamlit frontend providing the user interface          |
+| **Anaconda AI**     | Hosts the model locally and exposes it via REST API      |
+
+---
+
+### 🛡️ Why Use This Model?
+
+- 📍 **Fully Local Inference**: Ensures user data privacy with no external calls.  
+- 🛠️ **Efficient & Lightweight**: Runs on consumer hardware with moderate RAM.  
+- ⚡ **Instruction-Tuned**: Provides natural and coherent conversational responses.  
+- 💬 **Versatile**: Suitable for a variety of NLP tasks beyond chat.
+
+---
+
+### 🙏 Acknowledgements
+
+- Meta AI for the LLaMA 3 model family.  
+- Anaconda AI for enabling local model serving.  
+- The open-source community for tooling and benchmarking resources.
+
+
 ## 🛠️ Future Improvements
 
 - Add persistent chat history using SQLite or MongoDB
